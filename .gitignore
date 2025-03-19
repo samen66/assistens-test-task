@@ -1,0 +1,34 @@
+# Игнорируем каталоги зависимостей
+/vendor/
+node_modules/
+
+# Файлы кеша и логов
+/.cache/
+/logs/
+/storage/
+/tmp/
+/*.log
+*.log
+
+# Конфиденциальные файлы
+.env
+.env.local
+.env.*.local
+.phpunit.result.cache
+
+# Файлы Composer
+composer.lock
+
+# Конфигурационные файлы IDE
+.idea/
+.vscode/
+nbproject/
+
+# Файлы системы
+.DS_Store
+Thumbs.db
+
+# Автосгенерированные файлы
+/public/storage
+/public/hot
+/public/build
