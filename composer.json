@@ -1,0 +1,19 @@
+{
+    "name": "07/assistens-test-task",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "07\\AssistensTestTask\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Samen"
+        }
+    ],
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.72",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^10.5"
+    }
+}
