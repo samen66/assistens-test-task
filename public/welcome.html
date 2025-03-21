@@ -15,6 +15,25 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            position: relative;
+        }
+
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #f44336;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logout-button:hover {
+            background-color: #e53935;
         }
 
         .welcome-container {
@@ -54,6 +73,7 @@
     </style>
 </head>
 <body>
+<a href="/logout" class="logout-button">Выход</a>
 <div class="welcome-container">
     <h1>Добро пожаловать!</h1>
     <p>Мы рады видеть вас на нашей странице. Выберите, что хотите сделать дальше.</p>

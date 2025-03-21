@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/assets/css/login.css">
+</head>
+<body>
+<div class="login-container">
+    <h2>Log in</h2>
+    <div class="divider"></div>
+    <form id="login-form" method="post" action="/login">
+        <input type="hidden" name="csrf_token" value="<?= $csrfToken ?>">
+
+        <label>Email address or username</label>
+        <label>
+            <input type="email" name="email" required>
+        </label>
+
+        <label>Password</label>
+        <label>
+            <input type="password" name="password" required>
+        </label>
+
+        <button type="submit" class="login-btn">Log in</button>
+    </form>
+    <p>Don’t have an account? <a href="/registration">Sign up</a></p>
+</div>
+
+<script src="/assets/js/login.js"></script>
+</body>
+</html>
