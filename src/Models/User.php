@@ -82,9 +82,10 @@ class User
         $this->password = $password;
     }
 
-    public function getPermissions()
+    public function getPermissions(): array
     {
         //TODO: create Permissions modal
+        return [];
     }
 
 
