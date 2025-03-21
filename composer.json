@@ -3,7 +3,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "07\\AssistensTestTask\\": "src/"
+            "AssistensTestTask\\": "src/",
+            "Config\\": "config/"
         }
     },
     "authors": [
@@ -15,5 +16,8 @@
         "friendsofphp/php-cs-fixer": "^3.72",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.5"
-    }
+    },
+  "require": {
+    "ext-pdo": "*"
+  }
 }
