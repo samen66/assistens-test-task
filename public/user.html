@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/assets/css/user.css">
+</head>
+<body>
+<a href="/logout" class="logout-button">Logout</a>
+<div class="user-container">
+    <h2>Edit User</h2>
+    <form id="user-form">
+        <input type="hidden" id="user-id">
+        <label>
+            Name:
+            <input type="text" id="user-name" required>
+        </label>
+        <label>
+            Email:
+            <input type="email" id="user-email" required>
+        </label>
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('id');
+
+        fetch(`/user?id=${userId}`)
+            .then(response => response.json())
+            .then(user => {
+                document.getElementById('user-id').value = user.id;
+                document.getElementById('user-name').value = user.name;
+                document.getElementById('user-email').value = user.email;
+            });
+
+        document.getElementById('user-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const userId = document.getElementById('user-id').value;
+            const userName = document.getElementById('user-name').value;
+            const userEmail = document.getElementById('user-email').value;
+
+            fetch(`user?id=${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: userName,
+                    email: userEmail
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('User updated successfully.');
+                        window.location.href = '/users-page';
+                    } else {
+                        alert('Failed to update user.');
+                    }
+                });
+        });
+    });
+</script>
+</body>
+</html>

@@ -16,7 +16,7 @@ class LoginController
     public function login(string $email, string $password): string
     {
         if ($this->authenticator->login($email, $password)) {
-            header('Location: /welcome');
+            header('Location: /users-page');
             exit();
         }
 

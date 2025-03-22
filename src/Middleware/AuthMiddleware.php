@@ -17,9 +17,8 @@ class AuthMiddleware
     {
         // Проверяем, авторизован ли пользователь
         if (!$this->authenticator->check()) {
-            http_response_code(401); // Unauthorized
-            echo json_encode(['error' => 'Unauthorized access. Please log in.']);
-            exit;
+            header("Location: /login");
+            exit();
         }
     }
 
