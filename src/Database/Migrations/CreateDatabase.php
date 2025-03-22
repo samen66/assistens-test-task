@@ -28,7 +28,8 @@ class CreateDatabase
             echo "База данных '$dbname' успешно создана (если не существовала).\n";
 
         } catch (PDOException $e) {
-            die("Ошибка при создании базы данных: " . $e->getMessage());
+            echo "Ошибка при создании базы данных: " . $e->getMessage() . "\n";
+            exit(1);
         }
     }
 }
