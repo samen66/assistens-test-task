@@ -73,7 +73,6 @@ class UserRepository
      */
     public function findById(int $userId): User
     {
-
         $stmt = $this->db->prepare("SELECT * FROM " . User::$tableName . " WHERE id = :id");
         $stmt->execute(['id' => $userId]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -88,5 +87,45 @@ class UserRepository
             $result['email'],
             $result['password']
         );
+    }
+
+    public function getAllUsers(int $page = 1, int $pageSize = 10): array
+    {
+        $offset = ($page - 1) * $pageSize;
+        $stmt = $this->db->prepare("SELECT * FROM " . User::$tableName . " LIMIT :limit OFFSET :offset");
+        $stmt->bindValue(':limit', $pageSize, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $data = [];
+        $data['total'] = $this->db->query("SELECT COUNT(*) FROM " . User::$tableName)->fetchColumn();
+        $data['users'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data['page'] = $page;
+        $data['pageSize'] = $pageSize;
+        return $data;
+    }
+
+    /**
+     * @throws UserNotFoundException
+     */
+    public function updateUser(int $userId, string $name, string $email): bool
+    {
+        $stmt = $this->db->prepare("UPDATE " . User::$tableName . " SET name = :name, email = :email WHERE id = :id");
+        $stmt->execute([
+            'name' => $name,
+            'email' => $email,
+            'id' => $userId,
+        ]);
+
+        if ($stmt->rowCount() === 0) {
+            throw new UserNotFoundException("User with ID {$userId} not found.");
+        }
+        return true;
+    }
+
+    public function deleteUser(int $id): bool
+    {
+        $stmt = $this->db->prepare("DELETE FROM " . User::$tableName . " WHERE id = ?");
+        return $stmt->execute([$id]);
     }
 }

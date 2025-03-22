@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (result.errors) {
                 showError(registrationForm.querySelector('input[name="email"]'), result.errors.email);
             } else {
-                window.location.href = '/welcome';
+                window.location.href = '/login';
             }
         }
     });
