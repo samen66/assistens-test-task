@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Users</title>
+                <link rel="stylesheet" href="/assets/css/users.css">
+            </head>
+            <body>
+            <a href="/logout" class="logout-button">Logout</a>
+
+            <div class="users-container">
+                <h2>Users</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="users-list">
+                    <!-- Users will be dynamically loaded here -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button id="prev-page" disabled>Previous</button>
+                    <span id="page-number">1</span>
+                    <button id="next-page">Next</button>
+                </div>
+                <div class="pagination-info">
+                    <span id="total-users">Total Users: 0</span>
+                    <span id="page-info">Page: 1, Page Size: 10</span>
+                </div>
+            </div>
+
+            <script>
+                let currentPage = 1;
+                let pageSize = 10;
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    loadUsers(currentPage);
+
+                    document.getElementById('prev-page').addEventListener('click', function() {
+                        if (currentPage > 1) {
+                            currentPage--;
+                            loadUsers(currentPage);
+                        }
+                    });
+
+                    document.getElementById('next-page').addEventListener('click', function() {
+                        currentPage++;
+                        loadUsers(currentPage);
+                    });
+                });
+
+                function loadUsers(page) {
+                    fetch(`/users?page=${page}&pageSize=${pageSize}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const usersList = document.getElementById('users-list');
+                            usersList.innerHTML = '';
+                            data.users.forEach(user => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td>${user.id}</td>
+                                    <td>${user.name}</td>
+                                    <td>${user.email}</td>
+                                    <td>
+                                        <a href="/user-page?id=${user.id}">Edit</a>
+                                        <button onclick="deleteUser(${user.id})">Delete</button>
+                                    </td>
+                                `;
+                                usersList.appendChild(row);
+                            });
+
+                            document.getElementById('page-number').textContent = page;
+                            document.getElementById('prev-page').disabled = page === 1;
+                            document.getElementById('total-users').textContent = `Total Users: ${data.total}`;
+                            document.getElementById('page-info').textContent = `Page: ${page}, Page Size: ${pageSize}`;
+                        });
+                }
+
+                function deleteUser(userId) {
+                    if (confirm('Are you sure you want to delete this user?')) {
+                        fetch(`/user?id=${userId}`, {
+                            method: 'DELETE'
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    loadUsers(currentPage);
+                                } else {
+                                    alert('Failed to delete user.');
+                                }
+                            });
+                    }
+                }
+            </script>
+            </body>
+            </html>

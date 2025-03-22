@@ -39,7 +39,26 @@ class UserService
         return $this->userRepository->findById($userId);
     }
 
-    public function create(User $user): User {
+    public function create(User $user): User
+    {
         return $this->userRepository->create($user);
+    }
+
+    public function getAllUsers(int $page = 1, int $pageSize = 10): array
+    {
+        return $this->userRepository->getAllUsers($page, $pageSize);
+    }
+
+    /**
+     * @throws UserNotFoundException
+     */
+    public function updateUser(int $userId, string $name, string $email): bool
+    {
+        return $this->userRepository->updateUser($userId, $name, $email);
+    }
+
+    public function deleteUser(int $userId): bool
+    {
+        return $this->userRepository->deleteUser($userId);
     }
 }
