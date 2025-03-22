@@ -46,12 +46,12 @@ class Database
 
     public static function getDBHost()
     {
-        return Env::get('DB_HOST', 'localhost');
+        return Env::get('DB_HOST', 'db');
     }
 
     public static function getDBName()
     {
-        return Env::get('DB_NAME', 'test');
+        return Env::get('DB_NAME', 'assistant-test-task;');
     }
 
     public static function getDBUsername()
@@ -61,6 +61,6 @@ class Database
 
     public static function getDBPassword()
     {
-        return Env::get('DB_PASSWORD', '');
+        return Env::get('DB_PASSWORD', 'root');
     }
 }

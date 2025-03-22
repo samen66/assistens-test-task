@@ -24,7 +24,9 @@ class CreateUsersTable
             $db->exec($sql);
             echo "Таблица users создана успешно!\n";
         } catch (PDOException $e) {
-            die("Ошибка создания таблицы: " . $e->getMessage());
+            echo "Ошибка при создании table users: " . $e->getMessage() . "\n";
+
+            exit(1);
         }
     }
 }
