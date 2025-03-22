@@ -60,12 +60,12 @@ $routeHandler->add('POST', '/registration', function () use ($userService) {
     echo $controller->register($_POST['full_name'], $_POST['email'], $_POST['password']);
 }, []);
 $routeHandler->add('GET', '/registration', function () {
-    echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/registration.html'); // Отправляет содержимое login.html
+    echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../src/Views/registration.html'); // Отправляет содержимое login.html
 }, []);
 
 
 $routeHandler->add('GET', '/welcome', function () {
-    echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/welcome.html');
+    echo file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../src/Views/welcome.html');
 }, [$authMiddleware]); // Только для авторизованных пользователей
 
 $routeHandler->add('GET', '/', function () {

@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/public/assets/css/login.css">
+    <link rel="stylesheet" href="/assets/css/login.css">
 </head>
 <body>
 <div class="login-container">
     <h2>Log in</h2>
     <div class="divider"></div>
-    <form>
+    <form id="login-form" method="post" action="/login">
+        <input type="hidden" name="csrf_token" value="<?= $csrfToken ?>">
+
         <label>Email address or username</label>
         <label>
-            <input type="text" name="email" required>
+            <input type="email" name="email" required>
         </label>
 
         <label>Password</label>
@@ -21,16 +23,11 @@
             <input type="password" name="password" required>
         </label>
 
-        <div class="options">
-            <label><input type="checkbox"> Remember me</label>
-            <a href="#">Forgot your password?</a>
-        </div>
-
         <button type="submit" class="login-btn">Log in</button>
     </form>
-    <p>Don’t have an account? <a href="registration.html">Sign up</a></p>
+    <p>Don’t have an account? <a href="/registration">Sign up</a></p>
 </div>
 
-<script src="/public/assets/js/"></script>
+<script src="/assets/js/login.js"></script>
 </body>
 </html>

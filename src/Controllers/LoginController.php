@@ -33,7 +33,7 @@ class LoginController
 
     public function getLoginPage(): bool|string
     {
-        return file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/login.html');
+        return file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../src/Views/login.html');
     }
 
 }
