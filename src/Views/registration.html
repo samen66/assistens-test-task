@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-    <link rel="stylesheet" href="/public/assets/css/registration.css">
+    <link rel="stylesheet" href="/assets/css/registration.css">
 </head>
 <body>
 <div class="registration-container">
     <h2>Sign Up</h2>
-    <form id="registration-form">
+    <form id="registration-form" method="post" action="/registration">
         <label>Full Name</label>
         <label>
             <input type="text" name="full_name" required>
@@ -32,9 +32,9 @@
 
         <button type="submit" class="register-btn">Sign Up</button>
     </form>
-    <p>Already have an account? <a href="login.html">Log in</a></p>
+    <p>Already have an account? <a href="/login">Log in</a></p>
 </div>
 
-<script src="/public/assets/js/registration.js"></script>
+<script src="/assets/js/registration.js"></script>
 </body>
 </html>
