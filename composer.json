@@ -22,7 +22,6 @@
     "ext-pdo": "*",
     "ext-mbstring": "*",
     "ext-exif": "*",
-    "ext-pcntl": "*",
     "ext-bcmath": "*",
     "ext-gd": "*"
   }
