@@ -36,6 +36,7 @@ WORKDIR /var/www/html/
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Install PHP dependencies
+RUN composer update
 RUN composer install
 
 # Set the appropriate permissions
@@ -46,7 +47,7 @@ RUN chown -R www-data:www-data /var/www/html \
 # Copy and set up entrypoint
 COPY entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["sh", "entrypoint.sh"]
 CMD ["apache2-foreground"]
 
 
